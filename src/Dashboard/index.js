@@ -17,8 +17,9 @@ function Dashboard() {
     const [isEditing, setIsEditing] = useState(false);
 
     const handleEdit = (id) => {
-        //
-        console.log("Edit id", id);
+        const [employee] = employees.filter((employee) => employee.id === id);
+        setSelectedEmployee(employee);
+        setIsEditing(true);
     };
     const handleDelete = (id) => {
         Swal.fire({
@@ -26,8 +27,8 @@ function Dashboard() {
             title: "Are you sure?",
             text: "You won't be able to revert this!",
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it",
-            cancelButtonText: "No, cancel",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
         }).then((result) => {
             if (result.value) {
                 const [employee] = employees.filter(
@@ -75,7 +76,7 @@ function Dashboard() {
                 <Edit
                     employees={employees}
                     setEmployees={setEmployees}
-                    setIsAdding={setIsAdding}
+                    setIsEditing={setIsEditing}
                     selectedEmployee={selectedEmployee}
                 />
             )}
