@@ -1,4 +1,4 @@
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 // import styles from "@/styles/Home.module.css";
 
 import { useState } from "react";
@@ -16,11 +16,37 @@ function Dashboard() {
     const [isAdding, setIsAdding] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
-    const handleEdit = () => {
+    const handleEdit = (id) => {
         //
+        console.log("Edit id", id);
     };
-    const handleDelete = () => {
-        //
+    const handleDelete = (id) => {
+        Swal.fire({
+            icon: "warning",
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it",
+            cancelButtonText: "No, cancel",
+        }).then((result) => {
+            if (result.value) {
+                const [employee] = employees.filter(
+                    (employee) => employee.id === id
+                );
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Deleted!",
+                    text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+
+                setEmployees(
+                    employees.filter((employee) => employee.id !== id)
+                );
+            }
+        });
     };
 
     return (

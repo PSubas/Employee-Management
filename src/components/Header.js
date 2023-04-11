@@ -8,7 +8,7 @@ const Header = ({ setIsAdding }) => {
                 <button
                     onClick={() => setIsAdding(true)}
                     className="round-button">
-                    Add Button
+                    Add New Employee
                 </button>
             </div>
         </header>
